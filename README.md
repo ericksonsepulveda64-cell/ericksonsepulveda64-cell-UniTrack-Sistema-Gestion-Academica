@@ -30,15 +30,59 @@ El alcance funcional propuesto contempla:
 
 Estas funcionalidades describen el alcance previsto; su disponibilidad real dependerá de la implementación y las pruebas posteriores.
 
-## 5. Arquitectura seleccionada
+## 5. Arquitectura seleccionada: frontend y backend
 
-Para el diseño de UniTrack se adopta una **arquitectura por capas de tres niveles**, que separa la interfaz, el procesamiento de las solicitudes y el almacenamiento de datos.
+Para el diseño de UniTrack se propone una **arquitectura de tres capas**: presentación (frontend), lógica de aplicación (backend/API) y almacenamiento (base de datos). Esta separación permite distribuir las responsabilidades, facilitar el mantenimiento y reducir el acceso directo a información sensible.
 
-- **Frontend (presentación):** interfaz con la que interactúan estudiantes, personal académico y administradores.
-- **Backend / API (lógica de aplicación):** recibe solicitudes, valida datos, aplica reglas de negocio y controla el acceso a las operaciones.
-- **Base de datos (persistencia):** almacena la información académica, como estudiantes, asignaturas, inscripciones, horarios, calificaciones y usuarios.
+### 5.1 Frontend: interfaz de usuario
 
-**Flujo general:** el usuario interactúa con el frontend; este envía solicitudes al backend; el backend procesa las reglas y consulta o actualiza la base de datos; finalmente, devuelve una respuesta al frontend. El frontend no accede directamente a la base de datos.
+El frontend será la parte visible del sistema, utilizada por estudiantes, personal académico y administradores. Su responsabilidad será presentar la información y permitir que los usuarios interactúen con las funciones disponibles.
+
+Responsabilidades principales:
+
+- Mostrar pantallas de inicio de sesión y navegación.
+- Presentar calificaciones, asignaturas inscritas y horarios del estudiante.
+- Ofrecer formularios para gestionar estudiantes y registrar calificaciones a los usuarios autorizados.
+- Validar campos básicos antes de enviar formularios, por ejemplo, comprobar que no estén vacíos.
+- Enviar solicitudes al backend y mostrar los resultados o mensajes de error que este devuelva.
+- Mantener una interfaz clara y adaptada al tipo de usuario.
+
+El frontend **no debe conectarse directamente a la base de datos** ni decidir por sí solo si un usuario tiene permiso para modificar información. Los controles de seguridad definitivos deben aplicarse en el backend.
+
+### 5.2 Backend: API y lógica de negocio
+
+El backend será la parte encargada de procesar las solicitudes recibidas desde el frontend y aplicar las reglas del sistema. La API servirá como punto de comunicación entre la interfaz y los servicios de datos.
+
+Responsabilidades principales:
+
+- Recibir y responder solicitudes del frontend mediante endpoints definidos.
+- Autenticar usuarios y verificar permisos según sus roles.
+- Validar la información recibida antes de procesarla.
+- Aplicar las reglas de negocio para consultar o gestionar estudiantes, asignaturas, inscripciones, horarios y calificaciones.
+- Consultar, registrar o actualizar datos a través de la capa de acceso a datos.
+- Devolver respuestas estructuradas, con los datos solicitados o mensajes que indiquen errores.
+- Evitar que usuarios no autorizados accedan a información académica o ejecuten operaciones restringidas.
+
+### 5.3 Base de datos: almacenamiento
+
+La base de datos almacenará de forma organizada la información que necesita el sistema, incluyendo usuarios y roles, estudiantes, asignaturas, inscripciones, horarios y calificaciones. El backend será el responsable de realizar las operaciones de lectura y escritura, aplicando las validaciones y permisos correspondientes.
+
+### 5.4 ¿Cómo se comunicarán las partes?
+
+La comunicación propuesta entre frontend y backend se realizará mediante una **API HTTP**, utilizando solicitudes y respuestas en formato JSON. Los endpoints concretos se definirán durante la implementación.
+
+Flujo general de una operación:
+
+1. El usuario inicia una acción en el frontend, por ejemplo, consultar sus calificaciones.
+2. El frontend envía una solicitud HTTP al endpoint correspondiente del backend, incluyendo la información necesaria y las credenciales o token de sesión cuando aplique.
+3. El backend verifica la autenticación, los permisos y la validez de la solicitud.
+4. Si la operación está permitida, el backend consulta la base de datos y procesa los resultados.
+5. El backend devuelve una respuesta HTTP con los datos en JSON o con un mensaje de error apropiado.
+6. El frontend interpreta la respuesta y presenta la información al usuario.
+
+**Ejemplo:** cuando un estudiante solicita sus calificaciones, el frontend envía una petición al backend; el backend verifica que el estudiante tenga acceso únicamente a sus propios resultados, consulta los datos y devuelve la respuesta para mostrarla en pantalla.
+
+Esta comunicación deberá utilizar HTTPS en un entorno desplegado y proteger los datos personales mediante controles de acceso. El uso de HTTP/JSON y los endpoints descritos corresponde al diseño propuesto; su implementación debe confirmarse durante el desarrollo.
 
 ## 6. Herramientas utilizadas y de apoyo
 

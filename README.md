@@ -1,76 +1,82 @@
 # UniTrack – Sistema de Gestión Académica
 
-## 1. Descripción del proyecto
+## 1. Nombre del sistema
 
-UniTrack es una propuesta académica de sistema de gestión que busca organizar y facilitar la consulta de información relacionada con la vida académica de los estudiantes. El proyecto contempla funciones para consultar calificaciones, revisar asignaturas inscritas, visualizar horarios y gestionar información académica según los permisos de cada usuario.
+**UniTrack – Sistema de Gestión Académica**
 
-## 2. Problema que busca resolver
+UniTrack es un proyecto académico orientado al diseño de un sistema que facilite la organización y consulta de información académica de los estudiantes.
 
-La información académica puede resultar difícil de consultar cuando está distribuida en diferentes medios o procesos manuales. UniTrack propone centralizar esa información en un sistema organizado, con acceso controlado y una estructura que facilite su consulta y mantenimiento.
+## 2. Problema que resuelve
+
+Cuando la información académica se encuentra dispersa entre documentos, hojas de cálculo o procesos manuales, puede resultar difícil consultarla, mantenerla actualizada y controlar quién tiene permiso para modificarla. Esto puede ocasionar pérdida de tiempo, duplicación de datos y errores en el manejo de la información.
+
+UniTrack propone centralizar la información académica en una solución organizada, con acceso según el rol del usuario y una estructura que facilite su consulta y administración.
 
 ## 3. Objetivo general
 
-Diseñar una solución de gestión académica que permita organizar la información de estudiantes, asignaturas, horarios y calificaciones, aplicando principios de análisis de requisitos, modelado, arquitectura de software y planificación del desarrollo.
+Diseñar un sistema de gestión académica que permita organizar y consultar información de estudiantes, asignaturas inscritas, horarios y calificaciones, aplicando principios de análisis de requisitos, modelado UML, arquitectura de software, planificación y control de cambios.
 
-## 4. Usuarios principales
+## 4. Funcionalidades principales
 
-- **Estudiantes:** consultar sus calificaciones, asignaturas inscritas y horario académico.
-- **Personal académico o administrativo:** gestionar y revisar la información académica de acuerdo con los permisos asignados.
-- **Administradores:** gestionar usuarios, roles y permisos del sistema.
+El alcance funcional propuesto contempla:
 
-Estos perfiles representan el alcance funcional propuesto; su implementación debe verificarse durante una futura etapa de desarrollo.
+- **Autenticación de usuarios:** acceso al sistema mediante una cuenta.
+- **Consulta de calificaciones:** permitir que el estudiante revise sus resultados académicos.
+- **Consulta de asignaturas inscritas:** mostrar las asignaturas registradas para el estudiante.
+- **Consulta de horario académico:** facilitar la revisión del horario de clases.
+- **Gestión de estudiantes:** organizar y mantener los datos de los estudiantes.
+- **Registro y gestión de calificaciones:** permitir al personal autorizado registrar o actualizar resultados.
+- **Control de roles y permisos:** limitar las operaciones disponibles según el tipo de usuario.
 
-## 5. Funcionalidades principales propuestas
+Estas funcionalidades describen el alcance previsto; su disponibilidad real dependerá de la implementación y las pruebas posteriores.
 
-- Consulta de calificaciones.
-- Consulta de asignaturas inscritas.
-- Consulta de horario académico.
-- Gestión de estudiantes.
-- Registro y administración de información académica.
-- Autenticación de usuarios y control de acceso por roles.
+## 5. Arquitectura seleccionada
 
-## 6. Arquitectura propuesta
+Para el diseño de UniTrack se adopta una **arquitectura por capas de tres niveles**, que separa la interfaz, el procesamiento de las solicitudes y el almacenamiento de datos.
 
-Se propone una arquitectura por capas con separación de responsabilidades:
+- **Frontend (presentación):** interfaz con la que interactúan estudiantes, personal académico y administradores.
+- **Backend / API (lógica de aplicación):** recibe solicitudes, valida datos, aplica reglas de negocio y controla el acceso a las operaciones.
+- **Base de datos (persistencia):** almacena la información académica, como estudiantes, asignaturas, inscripciones, horarios, calificaciones y usuarios.
 
-- **Frontend:** interfaz para que los usuarios naveguen, consulten información y completen formularios.
-- **Backend / API:** recibe solicitudes, valida los datos, aplica las reglas de negocio y coordina las operaciones.
-- **Base de datos:** almacena la información de estudiantes, asignaturas, inscripciones, horarios, calificaciones y usuarios.
+**Flujo general:** el usuario interactúa con el frontend; este envía solicitudes al backend; el backend procesa las reglas y consulta o actualiza la base de datos; finalmente, devuelve una respuesta al frontend. El frontend no accede directamente a la base de datos.
 
-La interfaz se comunica con el backend mediante solicitudes definidas por la aplicación. El backend es responsable de acceder a la base de datos; el frontend no debe conectarse directamente a ella.
+## 6. Herramientas utilizadas y de apoyo
 
-## 7. Organización de la documentación
+- **GitHub:** alojamiento del repositorio y registro de cambios mediante commits.
+- **GitHub Issues:** registro y seguimiento de tareas, problemas y mejoras.
+- **GitHub Projects:** organización y visualización del avance en un tablero de trabajo.
+- **Visual Paradigm Online:** elaboración y documentación de modelos y diagramas UML.
+- **Markdown:** formato empleado para mantener la documentación técnica dentro del repositorio.
 
-La documentación técnica del proyecto se encuentra organizada en la carpeta `docs/`:
+## 7. Documentación del proyecto
 
-| Archivo | Contenido |
+Los documentos técnicos se encuentran en la carpeta [docs/](docs/):
+
+| Archivo | Descripción |
 |---|---|
 | [REQUISITOS.md](docs/REQUISITOS.md) | Requisitos funcionales y no funcionales e historias de usuario. |
 | [ARQUITECTURA.md](docs/ARQUITECTURA.md) | Capas, responsabilidades y comunicación entre componentes. |
-| [UML.md](docs/UML.md) | Descripción de los modelos UML y sus elementos principales. |
-| [SEGUIMIENTO.md](docs/SEGUIMIENTO.md) | Organización del trabajo y seguimiento de tareas. |
+| [UML.md](docs/UML.md) | Descripción de los modelos UML contemplados. |
+| [SEGUIMIENTO.md](docs/SEGUIMIENTO.md) | Organización y seguimiento de tareas. |
 | [CONTROL_CAMBIOS.md](docs/CONTROL_CAMBIOS.md) | Criterios para registrar y revisar cambios. |
-| [NOTA_VERSION_0.1.md](docs/NOTA_VERSION_0.1.md) | Alcance de la línea base académica y próximos pasos. |
+| [NOTA_VERSION_0.1.md](docs/NOTA_VERSION_0.1.md) | Alcance de la línea base documental y próximos pasos. |
 
-## 8. Herramientas de apoyo
+## 8. Estado actual del proyecto
 
-- **GitHub:** alojamiento del repositorio, control de cambios y colaboración.
-- **GitHub Issues:** registro y seguimiento de tareas, riesgos y mejoras.
-- **GitHub Projects:** organización visual del avance mediante un tablero Kanban.
-- **Visual Paradigm Online:** elaboración de diagramas y modelos de diseño.
+**Estado: análisis, diseño, arquitectura y documentación académica.**
 
-## 9. Estado actual del proyecto
+El repositorio cuenta con un README principal y documentos iniciales de requisitos, arquitectura, UML, seguimiento, control de cambios y nota de versión. El proyecto continúa en desarrollo académico; la documentación no significa que las funcionalidades estén implementadas ni que hayan superado pruebas.
 
-UniTrack se documenta como un proyecto académico en las etapas de análisis, diseño, arquitectura y planificación. La inclusión de requisitos, modelos y documentos no significa que las funcionalidades estén implementadas ni probadas. El estado de cada tarea debe contrastarse con los Issues y el tablero de GitHub Projects.
+Los estados concretos de las tareas deben verificarse en GitHub Issues y GitHub Projects. También queda pendiente incorporar y verificar los archivos gráficos finales de los diagramas UML, si aún no se han agregado.
 
-## 10. Próximos pasos
+## 9. Próximos pasos
 
-1. Revisar los requisitos y criterios de aceptación.
-2. Verificar y completar los modelos UML.
-3. Confirmar las tareas y sus estados en GitHub Issues y Projects.
-4. Iniciar la implementación de los módulos priorizados cuando la etapa de diseño esté validada.
-5. Relacionar los cambios de código con Issues y pruebas verificables.
+1. Revisar los requisitos y sus criterios de aceptación.
+2. Completar y agregar los diagramas UML finales.
+3. Verificar que las tareas estén registradas y actualizadas en Issues y Projects.
+4. Priorizar los módulos para una futura implementación.
+5. Documentar los cambios y las pruebas conforme avance el desarrollo.
 
-## 11. Repositorio
+## 10. Repositorio
 
-[Ver el repositorio de UniTrack en GitHub](https://github.com/ericksonsepulveda64-cell/ericksonsepulveda64-cell-UniTrack-Sistema-Gestion-Academica)
+[Consultar UniTrack en GitHub](https://github.com/ericksonsepulveda64-cell/ericksonsepulveda64-cell-UniTrack-Sistema-Gestion-Academica)
